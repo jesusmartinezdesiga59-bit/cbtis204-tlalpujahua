@@ -18,14 +18,22 @@
         .logo { height: 60px; }
         nav a { margin-left: 20px; text-decoration: none; color: var(--guinda); font-weight: bold; }
 
+        /* Adaptación para celulares */
+        @media (max-width: 768px) {
+            header { flex-direction: column; text-align: center; }
+            nav { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            nav a { margin-left: 0; }
+        }
+
         /* Hero */
         .hero {
             height: 80vh;
+            /* Usamos una imagen de prueba segura (Picsum) */
             background: linear-gradient(rgba(128, 0, 32, 0.7), rgba(128, 0, 32, 0.7)), 
-                        url('https://images.unsplash.com/photo-1523050853064-dbad323b7ff3?auto=format&fit=crop&w=1600&q=80');
+                        url('https://picsum.photos/1200/800');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: var(--blanco); text-align: center;
+            color: var(--blanco); text-align: center; padding: 0 20px;
         }
 
         /* Secciones */
@@ -40,10 +48,21 @@
 <body>
 
     <header>
-        <img src="https://share.google/k0RIfhSULTOWbWhRd" alt="Logo CBTIS 204" class="logo">
+        <!-- Usamos un logo de prueba provisional -->
+        <img src="https://placehold.co/150x60/800020/FFFFFF?text=Logo+CBTIS" alt="Logo CBTIS 204" class="logo">
         <nav>
             <a href="#">Inicio</a>
             <a href="#info">Información</a>
+            <a href="#carreras">Especialidades</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Formando los líderes del mañana</h1>
+        <p>CBTIS 204</p>
+    </section>
+
+    <<a href="#info">Información</a>
             <a href="#carreras">Especialidades</a>
         </nav>
     </header>
@@ -87,3 +106,9 @@
 
 </body>
 </html>
+!-- El resto de tus secciones de información y carreras van aquí abajo (puedes dejarlas exactamente igual que en el código anterior) -->
+
+</body>
+</html>
+
+
