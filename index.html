@@ -3,116 +3,687 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBTis 204 | Página Oficial</title>
+    <title>CBTis No. 204 | Sitio Oficial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* CSS INTEGRADO */
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; color: #333; background-color: #f9f9f9; }
-
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('http://googleusercontent.com/generated_image_content/0');
-            background-size: cover;
-            background-position: center;
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
+        /* ==========================================================================
+           1. VARIABLES DE COLOR E IDENTIDAD INSTITUCIONAL (DGETI)
+           ========================================================================== */
+        :root {
+            --guinda: #800020;
+            --guinda-oscuro: #590016;
+            --dorado: #b89353;
+            --dorado-brillante: #d4af37;
+            --oscuro: #1a202c;
+            --gris-texto: #4a5568;
+            --gris-claro: #f7fafc;
+            --blanco: #ffffff;
+            --azul-registro: #2b6cb0;
+            --verde-comunidad: #2f855a;
         }
 
-        .hero h1 { 
-            font-size: 3.5rem; 
-            margin: 0; 
-            border: 3px solid white; 
-            padding: 15px 30px; 
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        /* ==========================================================================
+           2. ESTILOS GENERALES Y BASE
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .info { padding: 40px; text-align: center; max-width: 800px; margin: auto; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-        .grid-carreras {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 50px;
+        body {
+            background-color: var(--gris-claro);
+            color: var(--oscuro);
+            line-height: 1.6;
+        }
+
+        /* ==========================================================================
+           3. MENÚ DE NAVEGACIÓN (HEADER)
+           ========================================================================== */
+        header {
+            background-color: var(--blanco);
+            border-bottom: 4px solid var(--dorado);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+
+        .header-container {
             max-width: 1200px;
-            margin: auto;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
         }
 
-        .card { 
-            border: 1px solid #eee; 
-            padding: 15px; 
-            text-align: center; 
-            border-radius: 12px; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background: #fff;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        .logo-circulo {
+            width: 55px;
+            height: 55px;
+            background: var(--guinda);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-weight: bold;
+            font-size: 16px;
+            border: 2px solid var(--dorado);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo-texto h1 {
+            font-size: 22px;
+            color: var(--guinda);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .logo-texto p {
+            font-size: 11px;
+            color: var(--gris-texto);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--oscuro);
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--guinda); }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--dorado);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after { width: 100%; }
+.menu-toggle {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: var(--guinda);
             cursor: pointer;
         }
 
-        .card img { 
-            width: 100%; 
-            height: 200px; 
-            object-fit: cover;
-            border-radius: 8px; 
+        /* ==========================================================================
+           4. PORTADA / INTERACTIVE SLIDER (JS DRIVEN)
+           ========================================================================== */
+        .hero-container {
+            position: relative;
+            height: 70vh;
+            min-height: 450px;
+            overflow: hidden;
+            background-color: #000;
         }
 
-        .card h3 { color: #800000; }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active { opacity: 1; }
+
+        /* Imágenes de fondo (puedes reemplazarlas por fotos locales del CBTis después) */
+        .slide:nth-child(1) {
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200') no-repeat center center/cover;
+        }
+        .slide:nth-child(2) {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200') no-repeat center center/cover;
+        }
+        .slide:nth-child(3) {
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200') no-repeat center center/cover;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            text-align: center;
+            color: var(--blanco);
+            padding: 0 20px;
+            transform: translateY(20px);
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .slide.active .hero-content { transform: translateY(0); }
+
+        .hero-content h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        .hero-content p {
+            font-size: 19px;
+            margin-bottom: 30px;
+            color: #e2e8f0;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--guinda);
+            color: var(--blanco);
+            padding: 14px 35px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            border: 2px solid var(--dorado);
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--guinda-oscuro);
+            border-color: var(--dorado-brillante);
+            transform: translateY(-2px);
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--blanco);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .slider-arrow:hover { background: rgba(255, 255, 255, 0.3); }
+        .arrow-left { left: 20px; }
+        .arrow-right { right: 20px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+.dot.active {
+            background: var(--dorado-brillante);
+            width: 25px;
+            border-radius: 6px;
+        }
+
+        /* ==========================================================================
+           5. SECCIONES Y CONTENEDORES (NOTICIAS / TARJETAS)
+           ========================================================================== */
+        .seccion {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .titulo-seccion {
+            font-size: 32px;
+            color: var(--guinda);
+            margin-bottom: 40px;
+            border-left: 6px solid var(--dorado);
+            padding-left: 15px;
+            font-weight: 700;
+        }
+
+        .grid-avisos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .tarjeta {
+            background: var(--blanco);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--guinda);
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(128,0,32,0.12);
+        }
+
+        .tarjeta.registro { border-top-color: var(--azul-registro); }
+        .tarjeta.comunidad { border-top-color: var(--verde-comunidad); }
+
+        .tarjeta-header {
+            padding: 20px 25px 0 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tag-categoria {
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .tarjeta:not(.registro):not(.comunidad) .tag-categoria { background: #fff5f5; color: var(--guinda); }
+        .tarjeta.registro .tag-categoria { background: #ebf8ff; color: var(--azul-registro); }
+        .tarjeta.comunidad .tag-categoria { background: #f0fff4; color: var(--verde-comunidad); }
+
+        .fecha-aviso { font-size: 13px; color: #a0aec0; }
+        .tarjeta-cuerpo { padding: 20px 25px 25px 25px; flex-grow: 1; }
+        .tarjeta-cuerpo h3 { font-size: 20px; margin-bottom: 12px; }
+
+        .info-resaltada {
+            background-color: var(--gris-claro);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--dorado);
+        }
+
+        .tarjeta-cuerpo ul { list-style-position: inside; font-size: 14px; color: var(--gris-texto); margin-bottom: 15px; }
+        .tarjeta-cuerpo ul li { margin-bottom: 4px; }
+
+        /* ==========================================================================
+           6. SECCIONES DE CARRERAS TÉCNICAS
+           ========================================================================== */
+        .grid-oferta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .item-oferta {
+            background-color: var(--blanco);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .item-oferta:hover {
+            background-color: var(--guinda);
+            color: var(--blanco);
+            transform: scale(1.03);
+        }
+
+        .icono-oferta { font-size: 35px; color: var(--dorado); margin-bottom: 15px; }
+        .item-oferta:hover .icono-oferta { color: var(--dorado-brillante); }
+        .item-oferta p { font-size: 14px; color: var(--gris-texto); }
+        .item-oferta:hover p { color: #e2e8f0; }
+/* ==========================================================================
+           7. PIE DE PÁGINA (FOOTER)
+           ========================================================================== */
+        footer {
+            background-color: var(--oscuro);
+            color: #cbd5e0;
+            padding: 60px 20px 20px 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--blanco);
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-col h4::after {
+            content: ''; position: absolute; width: 40px; height: 3px; background-color: var(--dorado); bottom: 0; left: 0;
+        }
+
+        .footer-col p { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .footer-col i { color: var(--dorado); width: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul a { color: #cbd5e0; text-decoration: none; }
+        .footer-col ul a:hover { color: var(--dorado-brillante); }
+
+        .redes-sociales { display: flex; gap: 15px; margin-top: 15px; }
+        .redes-sociales a {
+            display: inline-flex; width: 40px; height: 40px; background-color: #2d3748; color: var(--blanco);
+            border-radius: 50%; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s;
+        }
+        .redes-sociales a:hover { background-color: var(--guinda); }
+
+        .footer-bottom {
+            text-align: center; max-width: 1200px; margin: 40px auto 0 auto; padding-top: 25px;
+            border-top: 1px solid #2d3748; font-size: 13px; color: #a0aec0;
+        }
+
+        /* ==========================================================================
+           8. RESPONSIVE / ADAPTACIÓN A CELULARES
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            nav ul {
+                position: absolute; top: 100%; left: 0; width: 100%; background-color: var(--blanco);
+                flex-direction: column; gap: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
+            }
+            nav ul.show { max-height: 300px; }
+            nav ul li { width: 100%; text-align: center; }
+            nav ul li a { display: block; padding: 15px 0; border-bottom: 1px solid #edf2f7; }
+            nav ul li a::after { display: none; }
+            .hero-container { height: 55vh; }
+            .hero-content h2 { font-size: 28px; }
+            .titulo-seccion { font-size: 26px; }
+        }
     </style>
 </head>
 <body>
 
-    <header class="hero">
-        <h1>CBTis 204</h1>
-        <p>Excelencia académica y formación técnica</p>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo-area">
+                <div class="logo-circulo">204</div>
+                <div class="logo-texto">
+                    <h1>CBTis No. 204</h1>
+                    <p>Tlalpujahua, Michoacán</p>
+                </div>
+            </a>
+            <button class="menu-toggle" id="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#avisos">Avisos</a></li>
+                    <li><a href="#oferta">Oferta Educativa</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
+<section class="hero-container" id="inicio">
+        <div class="slide active">
+            <div class="hero-content">
+                <h2>Construye tu futuro hoy y únete a la gran familia</h2>
+                <p>Bachillerato tecnológico bivalente para integrarte al sector profesional o continuar tus estudios superiores.</p>
+                <a href="#avisos" class="cta-btn">Ver Convocatorias 2026</a>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="hero-content">
+                <h2>Formación Integral, Cultural y Deportiva</h2>
+                <p>Descubre y potencia tus talentos en nuestras puestas en escena estudiantiles y actividades académicas.</p>
+                <a href="#contacto" class="cta-btn">Saber Más</a>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="hero-content">
+                <h2>Compromiso con Nuestra Comunidad</h2>
+                <p>Participamos activamente en el desarrollo social a través de brigadas comunitarias y el Modelo de Formación DUAL.</p>
+                <a href="#oferta" class="cta-btn">Conocer Carreras</a>
+            </div>
+        </div>
 
-    <section class="info">
-        <h2>Bienvenidos al Portal Académico</h2>
-        <p>Somos una institución dedicada a la formación integral de jóvenes, brindando las herramientas necesarias para su futuro profesional.</p>
+        <button class="slider-arrow arrow-left" id="prev-slide"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="slider-arrow arrow-right" id="next-slide"><i class="fa-solid fa-chevron-right"></i></button>
+
+        <div class="slider-dots">
+            <div class="dot active" data-index="0"></div>
+            <div class="dot" data-index="1"></div>
+            <div class="dot" data-index="2"></div>
+        </div>
     </section>
 
-    <section class="carreras">
-        <h2 style="text-align: center;">Nuestras Especialidades</h2>
-        <div class="grid-carreras">
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" alt="Recursos Humanos">
-                <h3>Administración de Recursos Humanos</h3>
+    <section class="seccion" id="avisos">
+        <h2 class="titulo-seccion">Últimas Noticias y Convocatorias</h2>
+        
+        <div class="grid-avisos">
+            <div class="tarjeta">
+                <div class="tarjeta-header">
+                    <span class="tag-categoria">Fichas 2026</span>
+                    <span class="fecha-aviso">Feb 2026</span>
+                </div>
+                <div class="tarjeta-cuerpo">
+                    <h3>Proceso de Entrega de Fichas</h3>
+                    <div class="info-resaltada">
+                        <strong>Horario:</strong> 8:00 a 13:00 hrs<br>
+                        <strong>Lugar:</strong> Oficina de Control Escolar del Plantel
+                    </div>
+                    <p>Requisitos indispensables para obtener tu ficha de ingreso:</p>
+                    <ul>
+                        <li>Constancia de secundaria ORIGINAL.</li>
+                        <li>Copia de la CURP y Acta de Nacimiento.</li>
+                        <li>Comprobante de domicilio reciente.</li>
+                        <li>Copia de INE del Padre o Tutor.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" alt="Contabilidad">
-                <h3>Contabilidad</h3>
+
+            <div class="tarjeta registro">
+                <div class="tarjeta-header">
+                    <span class="tag-categoria">Egresados</span>
+                    <span class="fecha-aviso">Oct 2025</span>
+                </div>
+                <div class="tarjeta-cuerpo">
+                    <h3>Seguimiento del Talento DGETI</h3>
+                    <p>¡Tu historia nos inspira! Si perteneces a las generaciones <strong>2019-2022, 2020-2023 o 2021-2024</strong>, te invitamos a formar parte del mapa de talento institucional.</p>
+                    <p>Comparte tu ruta profesional y académica actual para ayudarnos a mejorar las oportunidades del plantel.</p>
+                </div>
             </div>
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" alt="Construcción">
-                <h3>Construcción</h3>
-            </div>
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" alt="Ofimática">
-                <h3>Ofimática</h3>
-            </div>
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" alt="Vida Saludable">
-                <h3>Vida Saludable</h3>
-            </div>
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" alt="Turismo">
-                <h3>Gestión e Innovación Turística</h3>
-            </div>
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" alt="E-commerce">
-                <h3>E-commerce</h3>
+
+            <div class="tarjeta comunidad">
+                <div class="tarjeta-header">
+                    <span class="tag-categoria">Vinculación</span>
+                    <span class="fecha-aviso">Reciente</span>
+                </div>
+                <div class="tarjeta-cuerpo">
+<h3>DGETI en tu Comunidad</h3>
+                    <p>Prestamos servicios integrales directos a los habitantes de nuestro subsistema en relación con la salud, orientación y soporte técnico.</p>
+                    <p>Un programa donde nuestros alumnos ponen en práctica sus competencias técnicas ayudando de manera activa al municipio.</p>
+                </div>
             </div>
         </div>
     </section>
 
+    <section class="seccion" id="oferta">
+        <h2 class="titulo-seccion">Carreras Técnicas </h2>
+       <h2>Nuestra Oferta Educativa</h2>
+    <div class="grid">
+        <!-- Ejemplo de estructura con imagen -->
+        <div class="card">
+            <img src="ruta/foto-rh.jpg" alt="Recursos Humanos" style="width: 100%; height: 150px; object-fit: cover; border-radius: 4px;">
+            <h3>Administración de Recursos Humanos</h3>
+        </div>
+        <div class="card">
+            <img src="ruta/foto-contabilidad.jpg" alt="Contabilidad" style="width: 100%; height: 150px; object-fit: cover; border-radius: 4px;">
+            <h3>Contabilidad</h3>
+        </div>
+        <div class="card">
+            <img src="ruta/foto-construccion.jpg" alt="Construcción" style="width: 100%; height: 150px; object-fit: cover; border-radius: 4px;">
+            <h3>Construcción</h3>
+        </div>
+        <div class="card">
+            <img src="ruta/foto-ofimatica.jpg" alt="Ofimática" style="width: 100%; height: 150px; object-fit: cover; border-radius: 4px;">
+            <h3>Ofimática</h3>
+        </div>
+        <div class="card">
+            <img src="ruta/foto-vida-saludable.jpg" alt="Vida Saludable" style="width: 100%; height: 150px; object-fit: cover; border-radius: 4px;">
+            <h3>Vida Saludable</h3>
+        </div>
+        <div class="card">
+            <img src="ruta/foto-turismo.jpg" alt="Turismo" style="width: 100%; height: 150px; object-fit: cover; border-radius: 4px;">
+            <h3>Gestión de Innovación Turística</h3>
+        </div>
+        <div class="card">
+            <img src="ruta/foto-ecommerce.jpg" alt="E-commerce" style="width: 100%; height: 150px; object-fit: cover; border-radius: 4px;">
+            <h3>E-commerce</h3>
+        </div>
+    </div>
+</section>
+
+        </div>
+    </section>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Nuestra Ubicación</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Km 39 carr. Maravatio-Tlalpujahua</p>
+                <p style="padding-left: 30px;">Tlalpujahua de Rayón, Michoacán</p>
+                <p style="padding-left: 30px;">C.P. 61060, México</p>
+            </div>
+            <div class="footer-col">
+                <h4>Información de Contacto</h4>
+                <p><i class="fa-solid fa-phone"></i> 711 158 0213</p>
+                <p><i class="fa-solid fa-envelope"></i> cbtis204.subdir@dgeti.sems.gob.mx</p>
+                <p><i class="fa-solid fa-clock"></i> Lun - Vie: 8:00 AM - 3:00 PM</p>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces Institucionales</h4>
+                <ul>
+                    <li><a href="https://dgeti.sep.gob.mx" target="_blank">DGETI Nacional</a></li>
+                    <li><a href="https://www.gob.mx/sep" target="_blank">Secretaría de Educación Pública</a></li>
+                </ul>
+                <div class="redes-sociales">
+                    <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-solid fa-globe"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Centro de Bachillerato Tecnológico, Industrial y de Servicios No. 204. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- MENÚ DESPLEGABLE REPSONSIVO ---
+            const menuToggle = document.getElementById('mobile-menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('show');
+                const icon = menuToggle.querySelector('i');
+                if(navMenu.classList.contains('show')) {
+                    icon.classList.replace('fa-bars', 'fa-xmark');
+                } else {
+                    icon.classList.replace('fa-xmark', 'fa-bars');
+                }
+            });
+// Cerrar menú al hacer clic en un enlace (Móvil)
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('show');
+                    menuToggle.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+                });
+            });
+
+            // --- LÓGICA DEL CARRUSEL DE IMÁGENES ---
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            const nextBtn = document.getElementById('next-slide');
+            const prevBtn = document.getElementById('prev-slide');
+            let currentSlide = 0;
+            let slideInterval;
+
+            function showSlide(index) {
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+                
+                currentSlide = (index + slides.length) % slides.length;
+                
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() { showSlide(currentSlide + 1); }
+            function prevSlide() { showSlide(currentSlide - 1); }
+
+            function startAutoSlide() { slideInterval = setInterval(nextSlide, 5000); }
+            function resetAutoSlide() { clearInterval(slideInterval); startAutoSlide(); }
+
+            nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+            prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.getAttribute('data-index'));
+                    showSlide(index);
+                    resetAutoSlide();
+                });
+            });
+
+            // Iniciar carrusel automático
+            startAutoSlide();
+        });
+    </script>
 </body>
 </html>
