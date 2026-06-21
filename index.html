@@ -3,59 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBTIS 204 | Tlalpujahua</title>
+    <title>CBTis 204 | Tlalpujahua</title>
     <style>
         :root { --guinda: #800020; --gris: #f4f4f4; --blanco: #ffffff; }
-        body { font-family: sans-serif; margin: 0; }
+        body { font-family: sans-serif; margin: 0; color: #333; }
         
         /* Encabezado */
-        header { padding: 20px 5%; background: var(--blanco); border-bottom: 3px solid var(--guinda); display: flex; justify-content: space-between; align-items: center; }
-        .logo { height: 50px; }
-        nav a { margin-left: 15px; text-decoration: none; color: var(--guinda); font-weight: bold; }
+        header { padding: 20px 5%; background: var(--guinda); color: var(--blanco); display: flex; justify-content: space-between; align-items: center; }
+        .logo-texto { font-size: 24px; font-weight: bold; }
+        nav a { margin-left: 15px; text-decoration: none; color: var(--blanco); font-weight: bold; }
 
         /* Hero */
-        .hero { height: 60vh; background: var(--guinda); color: var(--blanco); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero { 
+            height: 60vh; 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1523050853064-dbad323b7ff3?auto=format&fit=crop&w=1600'); 
+            background-size: cover; background-position: center;
+            color: var(--blanco); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
 
         /* Secciones */
         .contenedor { padding: 40px 5%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .tarjeta { background: var(--gris); padding: 15px; border-radius: 10px; }
-        
-        /* Ajuste móvil */
-        @media (max-width: 600px) { header { flex-direction: column; } nav { margin-top: 10px; } }
+        .tarjeta { background: var(--gris); padding: 15px; border-radius: 10px; border-bottom: 4px solid var(--guinda); }
+        .tarjeta img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div style="font-weight: bold; color: var(--guinda);">LOGO CBTIS 204</div>
+        <div class="logo-texto">CBTis 204</div>
         <nav>
             <a href="#inicio">Inicio</a>
-            <a href="#info">Admisión</a>
-            <a href="#carreras">Carreras</a>
+            <a href="#carreras">Especialidades</a>
         </nav>
     </header>
 
     <section id="inicio" class="hero">
-        <h1>CBTIS 204</h1>
-        <p>Tlalpujahua, Michoacán</p>
+        <h1>Formando los líderes del mañana</h1>
     </section>
 
-    <section id="info" class="contenedor">
-        <h2>Admisión 2026</h2>
-        <p>Consulta los requisitos para formar parte de nuestra comunidad educativa.</p>
-    </section>
-
-    <section id="carreras" class="contenedor" style="background: #eee;">
+    <section id="carreras" class="contenedor">
         <h2>Nuestras Especialidades</h2>
         <div class="grid">
-            <div class="tarjeta"><h3>Recursos Humanos</h3></div>
-            <div class="tarjeta"><h3>Contabilidad</h3></div>
-            <div class="tarjeta"><h3>Construcción</h3></div>
-            <div class="tarjeta"><h3>Ofimática</h3></div>
-            <div class="tarjeta"><h3>Vida Saludable</h3></div>
-            <div class="tarjeta"><h3>Turismo</h3></div>
-            <div class="tarjeta"><h3>E-commerce</h3></div>
+            <div class="tarjeta"><img src="https://picsum.photos/id/10/400/300"><h3>Recursos Humanos</h3></div>
+            <div class="tarjeta"><img src="https://picsum.photos/id/20/400/300"><h3>Contabilidad</h3></div>
+            <div class="tarjeta"><img src="https://picsum.photos/id/30/400/300"><h3>Construcción</h3></div>
+            <div class="tarjeta"><img src="https://picsum.photos/id/40/400/300"><h3>Ofimática</h3></div>
+            <div class="tarjeta"><img src="https://picsum.photos/id/50/400/300"><h3>Vida Saludable</h3></div>
+            <div class="tarjeta"><img src="https://picsum.photos/id/60/400/300"><h3>Gestión Turística</h3></div>
+            <div class="tarjeta"><img src="https://picsum.photos/id/70/400/300"><h3>E-commerce</h3></div>
         </div>
     </section>
 
