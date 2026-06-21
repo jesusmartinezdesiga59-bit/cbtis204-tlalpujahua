@@ -5,96 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBTIS 204 | Tlalpujahua</title>
     <style>
-        :root {
-            --guinda: #800020;
-            --gris: #f4f4f4;
-            --blanco: #ffffff;
-            --negro: #333;
-        }
-        body { font-family: sans-serif; margin: 0; color: var(--negro); }
-
-        /* Header */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: var(--blanco); border-bottom: 4px solid var(--guinda); }
-        .logo { height: 60px; }
-        nav a { margin-left: 20px; text-decoration: none; color: var(--guinda); font-weight: bold; }
-
-        /* Adaptación para celulares */
-        @media (max-width: 768px) {
-            header { flex-direction: column; text-align: center; }
-            nav { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-            nav a { margin-left: 0; }
-        }
+        :root { --guinda: #800020; --gris: #f4f4f4; --blanco: #ffffff; }
+        body { font-family: sans-serif; margin: 0; }
+        
+        /* Encabezado */
+        header { padding: 20px 5%; background: var(--blanco); border-bottom: 3px solid var(--guinda); display: flex; justify-content: space-between; align-items: center; }
+        .logo { height: 50px; }
+        nav a { margin-left: 15px; text-decoration: none; color: var(--guinda); font-weight: bold; }
 
         /* Hero */
-        .hero {
-            height: 80vh;
-            /* Usamos una imagen de prueba segura (Picsum) */
-            background: linear-gradient(rgba(128, 0, 32, 0.7), rgba(128, 0, 32, 0.7)), 
-                        url('https://picsum.photos/1200/800');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: var(--blanco); text-align: center; padding: 0 20px;
-        }
+        .hero { height: 60vh; background: var(--guinda); color: var(--blanco); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
 
         /* Secciones */
-        .seccion { padding: 50px 5%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--gris); padding: 20px; border-radius: 8px; border-bottom: 5px solid var(--guinda); }
-        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; margin-bottom: 10px; }
+        .contenedor { padding: 40px 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .tarjeta { background: var(--gris); padding: 15px; border-radius: 10px; }
         
-        footer { background: var(--guinda); color: var(--blanco); text-align: center; padding: 20px; }
+        /* Ajuste móvil */
+        @media (max-width: 600px) { header { flex-direction: column; } nav { margin-top: 10px; } }
     </style>
 </head>
 <body>
 
     <header>
-        <!-- Usamos un logo de prueba provisional -->
-        <img src="https://placehold.co/150x60/800020/FFFFFF?text=Logo+CBTIS" alt=" logo CBTIS 204" class="logo">
+        <div style="font-weight: bold; color: var(--guinda);">LOGO CBTIS 204</div>
         <nav>
-            <a href="#">Inicio</a>
-            <a href="#info">Información</a>
-            <a href="#carreras">Especialidades</a>
-      
+            <a href="#inicio">Inicio</a>
+            <a href="#info">Admisión</a>
+            <a href="#carreras">Carreras</a>
+        </nav>
+    </header>
 
-    <section class="hero">
-        <h1>Formando los líderes del mañana</h1>
-        <p>CBTIS 204</p>
+    <section id="inicio" class="hero">
+        <h1>CBTIS 204</h1>
+        <p>Tlalpujahua, Michoacán</p>
     </section>
 
-    <section id="info" class="seccion">
-        <h2>Información para Aspirantes</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Entrega de Fichas</h3>
-                <p><strong>Requisitos:</strong> Constancia de secundaria, CURP, acta de nacimiento, 2 fotos, comprobante de domicilio, copia INE tutor, cel con WhatsApp.</p>
-            </div>
-            <div class="card">
-                <h3>Beneficios</h3>
-                <p>Bachillerato bivalente, Beca Benito Juárez, Seguro IMSS, Modelo DUAL y actividades culturales/deportivas.</p>
-            </div>
-        </div>
-        <p style="margin-top: 20px;"><strong>Nota:</strong> El curso propedéutico e inducción se realizará en el mes de agosto. La asistencia es obligatoria.</p>
+    <section id="info" class="contenedor">
+        <h2>Admisión 2026</h2>
+        <p>Consulta los requisitos para formar parte de nuestra comunidad educativa.</p>
     </section>
 
-    <section id="carreras" class="seccion" style="background: var(--gris);">
-        <h2>Nuestra Oferta Educativa</h2>
+    <section id="carreras" class="contenedor" style="background: #eee;">
+        <h2>Nuestras Especialidades</h2>
         <div class="grid">
-            <div class="card"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=400"><h3>Admin. de Recursos Humanos</h3></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=400"><h3>Contabilidad</h3></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=400"><h3>Construcción</h3></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=400"><h3>Ofimática</h3></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1505576399279-565b52d4bec7?auto=format&fit=crop&w=400"><h3>Vida Saludable</h3></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=400"><h3>Gestión e Innovación Turística</h3></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=400"><h3>E-commerce</h3></div>
+            <div class="tarjeta"><h3>Recursos Humanos</h3></div>
+            <div class="tarjeta"><h3>Contabilidad</h3></div>
+            <div class="tarjeta"><h3>Construcción</h3></div>
+            <div class="tarjeta"><h3>Ofimática</h3></div>
+            <div class="tarjeta"><h3>Vida Saludable</h3></div>
+            <div class="tarjeta"><h3>Turismo</h3></div>
+            <div class="tarjeta"><h3>E-commerce</h3></div>
         </div>
     </section>
-
-    <footer>
-        <p>© 2026 CBTIS 204 - Tlalpujahua, Michoacán</p>
-    </footer>
 
 </body>
 </html>
-
-
-
