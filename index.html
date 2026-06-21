@@ -3,56 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBTis 204 | Tlalpujahua</title>
+    <title>CBTis 204 | Página Oficial</title>
+    
     <style>
-        :root { --guinda: #800020; --gris: #f4f4f4; --blanco: #ffffff; }
-        body { font-family: sans-serif; margin: 0; color: #333; }
-        
-        /* Encabezado */
-        header { padding: 20px 5%; background: var(--guinda); color: var(--blanco); display: flex; justify-content: space-between; align-items: center; }
-        .logo-texto { font-size: 24px; font-weight: bold; }
-        nav a { margin-left: 15px; text-decoration: none; color: var(--blanco); font-weight: bold; }
+        /* CSS INTEGRADO */
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; color: #333; background-color: #f9f9f9; }
 
-        /* Hero */
-        .hero { 
-            height: 60vh; 
+        .hero {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1523050853064-dbad323b7ff3?auto=format&fit=crop&w=1600'); 
-            background-size: cover; background-position: center;
-            color: var(--blanco); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+                        url('http://googleusercontent.com/generated_image_content/0');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
         }
 
-        /* Secciones */
-        .contenedor { padding: 40px 5%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .tarjeta { background: var(--gris); padding: 15px; border-radius: 10px; border-bottom: 4px solid var(--guinda); }
-        .tarjeta img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; }
+        .hero h1 { 
+            font-size: 3.5rem; 
+            margin: 0; 
+            border: 3px solid white; 
+            padding: 15px 30px; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .info { padding: 40px; text-align: center; max-width: 800px; margin: auto; }
+
+        .grid-carreras {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 50px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card { 
+            border: 1px solid #eee; 
+            padding: 15px; 
+            text-align: center; 
+            border-radius: 12px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .card img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover;
+            border-radius: 8px; 
+        }
+
+        .card h3 { color: #800000; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-texto">CBTis 204</div>
-        <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#carreras">Especialidades</a>
-        </nav>
+    <header class="hero">
+        <h1>CBTis 204</h1>
+        <p>Excelencia académica y formación técnica</p>
     </header>
 
-    <section id="inicio" class="hero">
-        <h1>Formando los líderes del mañana</h1>
+    <section class="info">
+        <h2>Bienvenidos al Portal Académico</h2>
+        <p>Somos una institución dedicada a la formación integral de jóvenes, brindando las herramientas necesarias para su futuro profesional.</p>
     </section>
 
-    <section id="carreras" class="contenedor">
-        <h2>Nuestras Especialidades</h2>
-        <div class="grid">
-            <div class="tarjeta"><img src="https://picsum.photos/id/10/400/300"><h3>Recursos Humanos</h3></div>
-            <div class="tarjeta"><img src="https://picsum.photos/id/20/400/300"><h3>Contabilidad</h3></div>
-            <div class="tarjeta"><img src="https://picsum.photos/id/30/400/300"><h3>Construcción</h3></div>
-            <div class="tarjeta"><img src="https://picsum.photos/id/40/400/300"><h3>Ofimática</h3></div>
-            <div class="tarjeta"><img src="https://picsum.photos/id/50/400/300"><h3>Vida Saludable</h3></div>
-            <div class="tarjeta"><img src="https://picsum.photos/id/60/400/300"><h3>Gestión Turística</h3></div>
-            <div class="tarjeta"><img src="https://picsum.photos/id/70/400/300"><h3>E-commerce</h3></div>
+    <section class="carreras">
+        <h2 style="text-align: center;">Nuestras Especialidades</h2>
+        <div class="grid-carreras">
+            <div class="card">
+                <img src="https://via.placeholder.com/300x200" alt="Recursos Humanos">
+                <h3>Administración de Recursos Humanos</h3>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x200" alt="Contabilidad">
+                <h3>Contabilidad</h3>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x200" alt="Construcción">
+                <h3>Construcción</h3>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x200" alt="Ofimática">
+                <h3>Ofimática</h3>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x200" alt="Vida Saludable">
+                <h3>Vida Saludable</h3>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x200" alt="Turismo">
+                <h3>Gestión e Innovación Turística</h3>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/300x200" alt="E-commerce">
+                <h3>E-commerce</h3>
+            </div>
         </div>
     </section>
 
